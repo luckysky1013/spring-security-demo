@@ -32,13 +32,21 @@
 
 
 
+
+    <!--<authentication-manager>-->
+        <!--<authentication-provider>-->
+            <!--<user-service>-->
+                <!--<user name="ryo" password="123456" authorities="ROLE_USER"/>-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
+
+
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="ryo" password="123456" authorities="ROLE_USER"/>
-            </user-service>
-        </authentication-provider>
+        <authentication-provider user-service-ref="customUserDetailsService"/>
     </authentication-manager>
+
+    <beans:bean id="customUserDetailsService" class="com.emma.security.jdbc.service.CustomUserDetailsService" />
 
 
 

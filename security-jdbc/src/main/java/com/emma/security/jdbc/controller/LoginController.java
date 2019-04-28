@@ -1,4 +1,4 @@
-package com.emma.spring.security.controller;
+package com.emma.security.jdbc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

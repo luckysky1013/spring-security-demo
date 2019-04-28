@@ -5,4 +5,5 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
     <import resource="application-mvc.xml"/>
     <import resource="application-security.xml"/>
+    <import resource="spring-datasource.xml"/>
 </beans>
