@@ -1,0 +1,45 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+    <!-- 登录url 放开权限 -->
+    <http pattern="/login" security="none"></http>
+
+    <!-- auto-config = true 则使用from-login. 如果不使用该属性 则默认为http-basic(没有session). -->
+    <http auto-config="true">
+        <!-- intercept-url:拦截器,可以设定哪些路径需要哪些权限来访问. filters=none 不使用过滤,也可以理解为忽略 -->
+        <intercept-url pattern="/**" access="ROLE_USER"/>
+        <!--
+            login-page:默认指定的登录页面.
+            authentication-failure-url:出错后跳转页面.
+            default-target-url:成功登陆后跳转页面 默认登录保护url
+            login-processing-url 登录请求拦截的url,也就是form表单提交时指定的action
+        -->
+        <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error=error"
+                    login-processing-url="/j_spring_security_check"  always-use-default-target="true" username-parameter="username" password-parameter="password"/>
+
+        <!-- logout-success-url:成功注销后跳转到的页面; -->
+        <logout
+                logout-url="/j_spring_security_logout"
+                logout-success-url="/login"
+                invalidate-session="true" />
+    </http>
+
+
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="ryo" password="123456" authorities="ROLE_USER"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+
+
+</beans:beans>
