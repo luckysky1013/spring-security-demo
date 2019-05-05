@@ -6,11 +6,6 @@
     http://www.springframework.org/schema/security
     http://www.springframework.org/schema/security/spring-security.xsd">
 
-
-    <!-- 匿名访问 -->
-    <http pattern="/login.html" security="none"></http>
-    <http pattern="/login_error.html" security="none"></http>
-
     <!-- 拦截规则 -->
     <http pattern="/**" use-expressions="false" entry-point-ref="casEntryPoint" authentication-manager-ref="casAuthenticationManager">
         <intercept-url pattern="/**" access="ROLE_USER"/>
