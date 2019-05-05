@@ -12,6 +12,7 @@
         <module>security-demo</module>
         <module>security-custom</module>
         <module>security-jdbc</module>
+        <module>security-cas</module>
 
     </modules>
 

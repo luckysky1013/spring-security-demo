@@ -1,0 +1,34 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+    <!-- 匿名访问 -->
+    <http pattern="/login.html" security="none"></http>
+    <http pattern="/login_error.html" security="none"></http>
+
+    <!-- 拦截规则 -->
+    <http pattern="/**" use-expressions="false" entry-point-ref="casEntryPoint" authentication-manager-ref="casAuthenticationManager">
+        <intercept-url pattern="/**" access="ROLE_USER"/>
+        <logout logout-url="/logout.html"/>
+        <custom-filter position="CAS_FILTER" ref="casFilter" />
+        <custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER"/>
+        <custom-filter ref="singleLogoutFilter" before="CAS_FILTER"/>
+        <!--	使用 frame-options 有三个可选的值：
+                DENY：浏览器拒绝当前页面加载任何Frame页面
+                SAMEORIGIN：frame页面的地址只能为同源域名下的页面
+                ALLOW-FROM：允许frame加载的页面地址 -->
+        <headers><frame-options policy="SAMEORIGIN"/></headers>
+    </http>
+
+    <!-- 认证管理器 -->
+    <authentication-manager alias="casAuthenticationManager">
+        <authentication-provider ref="casAuthenticationProvider" />
+    </authentication-manager>
+
+    <beans:import resource="cas.xml"/>
+</beans:beans>
