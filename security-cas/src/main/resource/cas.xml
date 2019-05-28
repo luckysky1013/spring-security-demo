@@ -68,7 +68,7 @@
 			<bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
 		</constructor-arg>
 		<!-- 直接输入"/logout/cas"即可退出，代替上面service参数 -->
-		<property name="filterProcessesUrl" value="/logout.html"/>
+		<property name="filterProcessesUrl" value="/j_spring_security_logout.html"/>
 	</bean>
 	<!-- 单点登出  结束 -->
 

@@ -13,6 +13,8 @@
         <module>security-custom</module>
         <module>security-jdbc</module>
         <module>security-cas</module>
+        <module>security-chsi</module>
+        <module>security-chsi</module>
 
     </modules>
 
