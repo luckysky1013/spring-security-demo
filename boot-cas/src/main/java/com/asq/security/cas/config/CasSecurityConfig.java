@@ -33,7 +33,7 @@ public class CasSecurityConfig {
 	public ServiceProperties serviceProperties() {
 		ServiceProperties serviceProperties = new ServiceProperties();
 		//本机服务，访问/login/cas时进行校验登录
-		serviceProperties.setService("http://localhost:8080/login/cas");
+		serviceProperties.setService("http://localhost:8080/");
 		serviceProperties.setSendRenew(false);
 		return serviceProperties;
 	}
@@ -46,7 +46,7 @@ public class CasSecurityConfig {
 		CasAuthenticationEntryPoint entryPoint
 				= new CasAuthenticationEntryPoint();
 		//cas登录服务
-		entryPoint.setLoginUrl("https://account.chdi.com.cn/passport/login");
+		entryPoint.setLoginUrl("http://cas.ziroom.com/CAS/login");
 		entryPoint.setServiceProperties(sP);
 		return entryPoint;
 	}
@@ -55,7 +55,7 @@ public class CasSecurityConfig {
 	public TicketValidator ticketValidator() {
 		//指定cas校验器
 		return new Cas30ServiceTicketValidator(
-				"https://account.chdi.com.cn/passport");
+				"http://cas.ziroom.com/CAS");
 	}
 
 	//cas认证
@@ -81,7 +81,7 @@ public class CasSecurityConfig {
 	public LogoutFilter logoutFilter() {
 		//退出后转发路径
 		LogoutFilter logoutFilter = new LogoutFilter(
-				"https://account.chdi.com.cn/passport/logout",
+				"http://cas.ziroom.com/CAS/logout",
 				securityContextLogoutHandler());
 		//cas退出
 		logoutFilter.setFilterProcessesUrl("/logout/cas");
@@ -92,7 +92,7 @@ public class CasSecurityConfig {
 	public SingleSignOutFilter singleSignOutFilter() {
 		//单点退出
 		SingleSignOutFilter singleSignOutFilter = new SingleSignOutFilter();
-		singleSignOutFilter.setCasServerUrlPrefix("https://account.chdi.com.cn/passport");
+		singleSignOutFilter.setCasServerUrlPrefix("http://cas.ziroom.com/CAS");
 		singleSignOutFilter.setIgnoreInitConfiguration(true);
 		return singleSignOutFilter;
 	}

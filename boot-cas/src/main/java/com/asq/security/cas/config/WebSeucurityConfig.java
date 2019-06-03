@@ -46,7 +46,7 @@ public class WebSeucurityConfig extends WebSecurityConfigurerAdapter {
 		//所有都需要认证才能访问
 		//由于设置了验证filter访问为，/login/cas，所以必须通过验证，否则出现死循环
 		http
-				.authorizeRequests().antMatchers("/login/cas").permitAll()
+				.authorizeRequests().antMatchers("/").permitAll()
 				.and()
 				.authorizeRequests().anyRequest().authenticated()
 				.and()
@@ -79,7 +79,7 @@ public class WebSeucurityConfig extends WebSecurityConfigurerAdapter {
 		CasAuthenticationFilter filter = new CasAuthenticationFilter();
 		filter.setServiceProperties(sp);
 		filter.setAuthenticationManager(authenticationManager());
-		filter.setFilterProcessesUrl("/login/cas");
+		filter.setFilterProcessesUrl("/");
 		return filter;
 	}
 
