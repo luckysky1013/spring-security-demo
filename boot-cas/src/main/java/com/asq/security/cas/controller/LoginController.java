@@ -23,7 +23,6 @@ public class LoginController {
 	public String adminPage(Model model) {
 		model.addAttribute("title", "Spring Security Hello World");
 		model.addAttribute("message", "This is protected page!");
-		User user= (User) SecurityContextHolder.getContext().getAuthentication();
 		return "admin";
 	}
 }
