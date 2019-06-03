@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author liujian
@@ -16,13 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 
 	/**
-	 * 返回 admin 视图
+	 * 返回chen
 	 * @return
 	 */
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
-	public String adminPage(Model model) {
-		model.addAttribute("title", "Spring Security Hello World");
-		model.addAttribute("message", "This is protected page!");
-		return "admin";
+	@ResponseBody
+	public String adminPage(){
+		return "success";
 	}
 }

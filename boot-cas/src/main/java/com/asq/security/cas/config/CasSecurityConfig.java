@@ -20,6 +20,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
+import com.asq.security.cas.service.UserDetailsServiceImpl;
+
 /**
  * @author liujian
  * @date 2019/5/28
@@ -31,7 +33,7 @@ public class CasSecurityConfig {
 	public ServiceProperties serviceProperties() {
 		ServiceProperties serviceProperties = new ServiceProperties();
 		//本机服务，访问/login/cas时进行校验登录
-		serviceProperties.setService("http://localhost:8080/caslogin.html");
+		serviceProperties.setService("http://localhost:8080/login/cas");
 		serviceProperties.setSendRenew(false);
 		return serviceProperties;
 	}
@@ -64,9 +66,7 @@ public class CasSecurityConfig {
 		provider.setServiceProperties(serviceProperties());
 		provider.setTicketValidator(ticketValidator());
 		//固定响应用户，在生产环境中需要额外设置用户映射
-		provider.setUserDetailsService(
-				s -> new User("auth-user", "123", true, true, true, true,
-						AuthorityUtils.createAuthorityList("ROLE_ADMIN")));
+		provider.setUserDetailsService(new UserDetailsServiceImpl());
 		provider.setKey("CAS_PROVIDER_LOCALHOST_8123");
 		return provider;
 	}

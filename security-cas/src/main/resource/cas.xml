@@ -21,7 +21,9 @@
 	</bean>
 
 	<!-- 验证成功后的回调处理 -->
-	<bean id="authenticationSuccessHandler" class="com.emma.security.cas.securtiy.CustomAuthenticationSuccessHandler"></bean>
+	<bean id="authenticationSuccessHandler" class="com.emma.security.cas.securtiy.CustomAuthenticationSuccessHandler">
+		<property name="defaultTargetUrl" value="/graduate"/>
+	</bean>
 	<!-- 验证失败后的回调处理 -->
 	<bean id="authenticationFailureHandler"  class="com.emma.security.cas.securtiy.CustomAuthenticationFailureHandler"></bean>
 
